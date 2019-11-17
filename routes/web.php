@@ -14,19 +14,19 @@
 
 
 //RUTAS CON PREFIJO AUTH
-$app->group(['namespace' => '\App\Http\Controllers\V1','prefix'=>'auth'], function () use ($app) {
-    $app->post('/login', 'AuthenticationController@login');
-    $app->post('/refresh', 'AuthenticationController@refreshToken');
-    $app->post('/logout', 'AuthenticationController@logout');
+$router->group(['namespace' => '\App\Http\Controllers\V1','prefix'=>'auth'], function () use ($router) {
+    $router->post('/login', 'AuthenticationController@login');
+    $router->post('/refresh', 'AuthenticationController@refreshToken');
+    $router->post('/logout', 'AuthenticationController@logout');
 });
 
 //RUTAS PROTEGIDAS SIN PREFIJO
-$app->group(['namespace' => '\App\Http\Controllers\V1','middleware' => ['jwt.auth'] ], function () use ($app) {
+$router->group(['namespace' => '\App\Http\Controllers\V1','middleware' => ['jwt.auth'] ], function () use ($router) {
 
     //GET DATA
-    $app->get('/data','DataController@getData');
+    $router->get('/data','DataController@getData');
 
-    $app->get('/items','DataController@getItems');
+    $router->get('/items','DataController@getItems');
 
 });
 
