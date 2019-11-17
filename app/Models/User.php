@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +19,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var array
      */
+
     protected $fillable = [
-        'name', 'email', 'phone', 'password',
+        'sucursal_id',
+        'bodega_id',
+        'name',
+        'cedula',
+        'direccion',
+        'telefono',
+        'email',
+        'correo',
+        'role',
+        'password',
+        'api_token',
     ];
 
     /**
@@ -49,5 +61,58 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+
+    public function ventas() {
+        return $this->hasMany(Venta::class);
+    }
+
+    public function sucursal(){
+        return $this->belongsTo(Sucursal::class);
+    }
+
+    public function bodega(){
+        return $this->belongsTo(Bodega::class);
+    }
+
+    public function rol(){
+        return $this->belongsTo(Role::class,'role');
+    }
+
+    public function comisiones(){
+        return $this->hasMany(ComisionVenta::class);
+    }
+
+    public function cobros(){
+        return $this->hasMany(Cobro::class);
+    }
+
+    public function isAdmin (){
+        if($this->role == 1 ){
+            return true;
+        }
+        return false;
+    }
+
+    public function isAdminBodega (){
+        if($this->role == 1 || $this->role == 2){
+            return true;
+        }
+        return false;
+    }
+
+    public function isCobrador (){
+        if($this->role == 1 || $this->role == 3){
+            return true;
+        }
+        return false;
+    }
+
+    public function isVendedor(){
+        if($this->role == 1 || $this->role == 4){
+            return true;
+        }
+        return false;
     }
 }

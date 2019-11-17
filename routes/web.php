@@ -11,15 +11,22 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+
+
+//RUTAS CON PREFIJO AUTH
+$router->group(['namespace' => '\App\Http\Controllers\V1','prefix'=>'auth'], function () use ($router) {
+    $router->post('/login', 'AuthenticationController@login');
+    $router->post('/refresh', 'AuthenticationController@refreshToken');
+    $router->post('/logout', 'AuthenticationController@logout');
 });
 
-$router->group([
-    'namespace' => '\App\Http\Controllers\V1',
-    'prefix' => ''],
-    function () use ($router) {
-        $router->post('authenticate', 'AuthenticationController@authenticate');
-        $router->post('user', 'UserController@store');
+//RUTAS PROTEGIDAS SIN PREFIJO
+$router->group(['namespace' => '\App\Http\Controllers\V1','middleware' => ['jwt.auth'] ], function () use ($router) {
 
-    });
+    //GET DATA
+    $router->get('/data','DataController@getData');
+
+    $router->get('/items','DataController@getItems');
+
+});
+
