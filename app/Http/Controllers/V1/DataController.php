@@ -55,7 +55,7 @@ class DataController extends Controller {
             $strategy = new $this->estrategias[$request->entidad];
             $items = $strategy->getItems($request)->get();
 
-            return response()->json($items);
+            return response()->json([$request->entidad => $items]);
 
         }catch (\Exception $e){
             return response()->json(['error'=>true,'message'=> $e->getMessage()]);
