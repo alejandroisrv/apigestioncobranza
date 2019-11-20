@@ -12,7 +12,7 @@ class VentaStrategy extends BaseStrategy implements Strategy
 
     public function getItems(Request $request)
     {
-        $ventas = Venta::with('productos_venta')->whereHas('vendedor',function($q){
+        $ventas = Venta::with(['productos_venta','acuerdo_pago','abonos'])->whereHas('vendedor',function($q){
             return $q->where('sucursal_id',$this->sucursal);
         });
 
