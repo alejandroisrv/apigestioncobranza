@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V1\Strategy;
 
 
 use App\Models\Cliente;
+use App\Models\Municipio;
 use Laravel\Lumen\Http\Request;
 
 class ClienteStrategy extends BaseStrategy implements Strategy
@@ -18,8 +19,8 @@ class ClienteStrategy extends BaseStrategy implements Strategy
         $codigo = isset($data['buscar']) ? $data['buscar'] : null ;
 
         $clientes = Cliente::withCount('pagos_clientes')
-            ->with('pagos_clientes')
-            ->where('sucursal_id', $this->sucursal );
+            ->with(['pagos_clientes','municipio'])
+            ->where('sucursal_id', $this->sucursal )->get();
 
         return $clientes;
     }

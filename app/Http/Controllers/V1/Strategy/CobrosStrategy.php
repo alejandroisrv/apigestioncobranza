@@ -12,7 +12,7 @@ class CobrosStrategy extends BaseStrategy implements Strategy {
     public function getItems(Request $request)
     {
 
-        $cobros = Cobro::with('items')->where('user_id',$this->user->id);
+        $cobros = Cobro::with(['items.ruta_items.cliente'])->where('user_id',$this->user->id)->get();
 
         return $cobros;
 

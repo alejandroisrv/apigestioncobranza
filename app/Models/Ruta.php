@@ -19,10 +19,6 @@ class Ruta extends Model
         return $this->belongsTo(Municipio::class);
     }
 
-    public function cliente(){
-        return $this->hasManyThrough(Cliente::class,'App\RutaItem');
-    }
-
     public function cobros (){
         return $this->hasMany(Cobro::class);
 

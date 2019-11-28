@@ -30,7 +30,6 @@ class Venta extends Model
     }
 
     public function tipos_ventas(){
-
         return $this->belongsTo(TipoVenta::class,'tipo_venta','id');
     }
     public function comisiones(){

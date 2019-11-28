@@ -12,7 +12,17 @@ class RutaStrategy extends BaseStrategy implements Strategy
 
     public function getItems(Request $request)
     {
-        $rutas = Ruta::with('items')->where('sucursal_id',$this->sucursal);
+        $rutas = Ruta::with(['items.cliente'])->where('sucursal_id',$this->sucursal)->get();
+
+        $rutas->map(function ($ruta) {
+
+            foreach($ruta->items as $item){
+                $item->clienteNombre = $item->cliente->nombre;
+                $item->clienteDireccion = $item->cliente->direccion;
+                unset($item->cliente);
+            }
+
+        });
         return $rutas;
     }
 

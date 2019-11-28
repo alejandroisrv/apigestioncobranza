@@ -13,7 +13,9 @@ class ProductoStrategy extends BaseStrategy implements Strategy
     public function getItems(Request $request)
     {
 
-        $productos = ProductosEntregadas::with('productos.producto')->where('vendedor_id',$this->user->id);
+        $productos = ProductosEntregadas::where('vendedor_id',$this->user->id)->get();
+
+        $productos->load(['productos.producto']);
 
         return $productos;
 

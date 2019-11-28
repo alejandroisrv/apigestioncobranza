@@ -36,11 +36,11 @@ class DataController extends Controller {
             $CobrosStrategy = new $this->estrategias['CB'];
 
             return response()->json([
-                'productos' => $ProductoStrategy->getItems($request)->get(),
-                'rutas' => $RutaStrategy->getItems($request)->get(),
-                'ventas' => $VentaStrategy->getItems($request)->get(),
-                'cobros' => $CobrosStrategy->getItems($request)->get(),
-                'clientes' => $ClientesStrategy->getItems($request)->get(),
+                'productos' => $ProductoStrategy->getItems($request),
+                'rutas' => $RutaStrategy->getItems($request),
+                'ventas' => $VentaStrategy->getItems($request),
+                'cobros' => $CobrosStrategy->getItems($request),
+                'clientes' => $ClientesStrategy->getItems($request),
             ]);
 
         }catch (\Exception $e){
@@ -53,9 +53,9 @@ class DataController extends Controller {
         try{
 
             $strategy = new $this->estrategias[$request->entidad];
-            $items = $strategy->getItems($request)->get();
+            $items = $strategy->getItems($request);
 
-            return response()->json([$request->entidad => $items]);
+            return response()->json([$request->entidad => $items],201);
 
         }catch (\Exception $e){
             return response()->json(['error'=>true,'message'=> $e->getMessage()]);
