@@ -24,13 +24,15 @@ class Cliente extends Model
     public function getDeudaAttribute(){
         $deuda = 0;
         $pagos = 0;
-        $this->ventas->map(function($venta) use ($deuda) {
+
+
+        /*$this->ventas->map(function($venta) use (&$deuda) {
             $deuda += round($venta->total);
         });
 
-        $this->abonos->map(function($abono) use ($pagos) {
+        $this->abonos->map(function($abono) use (&$pagos) {
             $pagos += round($abono->monto);
-        });
+        });*/
 
         return $deuda - $pagos;
     }
