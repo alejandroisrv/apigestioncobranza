@@ -25,7 +25,6 @@ class Cliente extends Model
         $deuda = 0;
         $pagos = 0;
 
-
         /*$this->ventas->map(function($venta) use (&$deuda) {
             $deuda += round($venta->total);
         });
