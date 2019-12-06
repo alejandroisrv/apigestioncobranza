@@ -23,7 +23,7 @@ class ClienteStrategy extends BaseStrategy implements Strategy
             ->with(['pagos_clientes','municipio'])
             ->where('sucursal_id', $this->sucursal )->get();
 
-        $clientes = DB::table("clientes")->select('id')->whereNotIn('id', [1, 2, 3])->pluck('id');
+        $clientes = DB::table("clientes")->select('id')->whereNotIn('id', [1, 2, 3])->toSql();
 
         return $clientes;
     }
