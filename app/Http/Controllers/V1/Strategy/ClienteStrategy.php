@@ -21,10 +21,10 @@ class ClienteStrategy extends BaseStrategy implements Strategy
 
         $clientes = Cliente::withCount('pagos_clientes')
             ->with(['pagos_clientes','municipio'])
-            ->where('sucursal_id', $this->sucursal )->get();
+            ->where('sucursal_id', $this->sucursal )
+            ->get();
 
-        $clientes = DB::table("clientes")->select('id')->whereNotIn('id', [1, 2, 3])->toSql();
-
+        
         return $clientes;
     }
 
