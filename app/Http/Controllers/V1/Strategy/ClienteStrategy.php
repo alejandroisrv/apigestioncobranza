@@ -24,7 +24,7 @@ class ClienteStrategy extends BaseStrategy implements Strategy
             ->where('sucursal_id', $this->sucursal )
             ->get();
 
-        
+
         return $clientes;
     }
 

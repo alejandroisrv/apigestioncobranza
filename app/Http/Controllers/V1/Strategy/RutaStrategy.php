@@ -23,6 +23,13 @@ class RutaStrategy extends BaseStrategy implements Strategy
             }
 
         });
+
+        array_push($rutas,[
+            'id' => 0,
+            'nombre'=> 'Clientes sin rutas',
+            'municipio_id' => 1,
+        ]);
+
         return $rutas;
     }
 
