@@ -28,7 +28,7 @@ class RutaStrategy extends BaseStrategy implements Strategy
 
         });
 
-        array_push($rutasR,[
+        $rutasR->add([
             'id' => 0,
             'nombre'=> 'Clientes sin rutas',
             'municipio_id' => 1,
