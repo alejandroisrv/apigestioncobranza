@@ -14,7 +14,9 @@ class RutaStrategy extends BaseStrategy implements Strategy
     {
         $rutas = Ruta::with(['items.cliente'])->where('sucursal_id',$this->sucursal)->get();
 
-        $rutas->map(function ($ruta) {
+        $rutasR = collect();
+
+        $rutas->map(function ($ruta) use ($rutasR) {
 
             foreach($ruta->items as $item){
                 $item->clienteNombre = $item->cliente->nombre;
@@ -22,15 +24,17 @@ class RutaStrategy extends BaseStrategy implements Strategy
                 unset($item->cliente);
             }
 
+            $rutasR->add($ruta);
+
         });
 
-        array_push($rutas,[
+        array_push($rutasR,[
             'id' => 0,
             'nombre'=> 'Clientes sin rutas',
             'municipio_id' => 1,
         ]);
 
-        return $rutas;
+        return $rutasR;
     }
 
     public function addItem(Request $request)
