@@ -10,8 +10,8 @@ use Laravel\Lumen\Http\Request;
 class RutaStrategy extends BaseStrategy implements Strategy
 {
 
-    public function getItems(Request $request)
-    {
+    public function getItems(Request $request){
+
         $rutas = Ruta::with(['items.cliente'])->where('sucursal_id',$this->sucursal)->get();
 
         $rutasR = collect();
@@ -25,20 +25,14 @@ class RutaStrategy extends BaseStrategy implements Strategy
             }
 
             $rutasR->add($ruta);
-
         });
 
-        $rutasR->add([
-            'id' => 0,
-            'nombre'=> 'Clientes sin rutas',
-            'municipio_id' => 1,
-        ]);
-
+        $rutasR->add(['id' => 0, 'nombre'=> 'Otros clientes','municipio_id' => 1]);
         return $rutasR;
     }
 
-    public function addItem(Request $request)
-    {
-        // TODO: Implement addItem() method.
+    public function addItem(Request $request){
+
     }
+
 }
