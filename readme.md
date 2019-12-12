@@ -1,57 +1,28 @@
-# Lumen with JWT Authentication
-Basically this is a starter kit for you to integrate Lumen with [JWT Authentication](https://jwt.io/).
 
-## What's Added
+**API REST Gestion Cobranza**
 
-- [Lumen 5.8](https://github.com/laravel/lumen/tree/v5.8.0).
-- [JWT Auth](https://github.com/tymondesigns/jwt-auth) for Lumen Application. <sup>[1]</sup>
-- [CORS and Preflight Request](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) support.
+La API REST utiliza el patron de diseño de estrategia, la autenticacion es basada **token con JWT**
 
-## Quick Start
+** **
 
-- Clone this repo or download it's release archive and extract it somewhere
-- You may delete `.git` folder if you get this code via `git clone`
-- Run `composer install`
-- Run `composer update`
-- Run `php artisan jwt:secret`
-- Configure your `.env` file for authenticating via database
+**Requerimientos del proyecto (Lumen)**
 
-## Examples
+PHP 7
 
-To authenticate a user, make a `POST` request to `/api/v1/auth` with parameter as mentioned below:
+OpenSSL PHP Extension
 
-```
-email: edward@example.com
-password: edward123
-```
+PDO PHP Extension
 
-Response:
+Mbstring PHP Extension
 
-```
-{
-  "success": {
-    "message": "token_generated",
-    "token": "a_long_token_appears_here"
-  }
-}
-```
+Tokenizer PHP Extension
 
-```
-⇒  php artisan route:list
-+--------+----------------------+---------------------+------------------------------------------+------------------+------------+
-| Verb   | Path                 | NamedRoute          | Controller                               | Action           | Middleware |
-+--------+----------------------+---------------------+------------------------------------------+------------------+------------+
-| POST   | /api/v1/auth/login   | api.auth.login      | App\Http\Controllers\Auth\AuthController | postLogin        |            |
-| GET    | /api                 | api.index           | App\Http\Controllers\APIController       | getIndex         | jwt.auth   |
-| GET    | /api/auth/user       | api.auth.user       | App\Http\Controllers\Auth\AuthController | getUser          | jwt.auth   |
-| PATCH  | /api/auth/refresh    | api.auth.refresh    | App\Http\Controllers\Auth\AuthController | patchRefresh     | jwt.auth   |
-| DELETE | /api/auth/invalidate | api.auth.invalidate | App\Http\Controllers\Auth\AuthController | deleteInvalidate | jwt.auth   |
-+--------+----------------------+---------------------+------------------------------------------+------------------+------------+
-```
+XML PHP Extension
 
-## License
+** **
 
-```
-Laravel and Lumen is a trademark of Taylor Otwell
-Sean Tymon officially holds "Laravel JWT" license
-```
+**Url de la API**
+
+[
+
+https://api.creditostorres.com/](https://api.creditostorres.com/)
